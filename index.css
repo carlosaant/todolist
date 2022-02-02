@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Courier New", Courier, monospace;
+}
+
+body {
+  background: #5E6FC2; /* fallback for old browsers */
+}
+
+.div-head {
+  width: 500px;
+  height: 180px;
+  background-color: #F8F8FF;
+
+  margin: auto;
+  margin-top: 5px;
+
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+.div-head h1 {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.inpt-tarefa {
+  padding: 12px 20px;
+  margin: 8px 0;
+  margin-top: 20px;
+  box-sizing: border-box;
+
+  border: 2px solid rgb(170, 169, 169);
+  border-radius: 3px;
+
+  background-color: white;
+  color: black;  
+  text-align: center;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+.inpt-tarefa:focus {
+  border: 2px solid rgb(117, 115, 115);
+  background-color: #E6F4F1;
+  outline: none;
+}
+
+.btn-adicionar {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+
+  font-weight: bold;
+}
+.btn-adicionar:hover{
+    background-color: #5cdf00;
+}
+
+.div-body{
+  width: 500px;
+  /* height: 180px; */
+  background-color: #F8F8FF;
+
+  margin: auto;
+  margin-top: 5px;
+
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+.list-tasks{
+  list-style: none;
+  font-size: 18px;
+  padding: 5px;
+
+}
+
+.list-tasks li{
+  max-width: 400px;
+  background-color: #8A8DBA;
+  color: #F8F8FF;
+  padding: 12px 18px;
+  border-radius: 2px;
+  border: 1px solid white;
+  margin: auto;
+  display: block;
+  position: relative;
+
+  overflow: hidden;
+}
+
+.list-tasks li:hover{
+  background-color: #67698b;
+}
+
+.list-tasks li button{
+  /* background-color: transparent; */
+  background-image: url('../Desafio-TODOLIST/assets/excluir.png');
+  background-position:center;
+  background-repeat:no-repeat;
+  background-size: cover; 
+  background-color: #FBEAFF;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  
+  border: none;
+
+  padding: 16px 16px;
+  border-radius: 3px;
+  margin-right: 2px;
+  margin-top: 1px;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  position: absolute;
+  top: 47%;
+  right: 0%;
+  transform: translate(0%, -50%);
+}
+
+.list-tasks li button:hover{
+  background-image: url('../Desafio-TODOLIST/assets/excluir.png');
+  background-color: #2EE59D;
+  box-shadow: 0px 10px 15px rgba(46, 229, 157, 0.4);
+}
+
+.list-tasks input[type="checkbox"]{
+  width: 25px;
+  height: 25px;
+  border: 1px solid #4B4453;
+  border-radius: 2px;
+
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  transform: translate(0%, -50%);
+  margin-left: 2px;
+}
+
+
+.alerta {
+  width: 500px;
+  padding: 15px;
+  border: 1px solid gray;
+  border-radius: 3px;
+  margin: auto;
+  margin-top: 5px;
+  font-size: 18px;
+  text-align: center;
+ }
+ .error {
+  border-color: #e8273b;
+  color: #FFF;
+  background-color: #ed5565;
+ }
+
+ .borda-error{
+  border: 2px solid red;
+ }
