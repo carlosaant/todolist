@@ -1,8 +1,8 @@
 ﻿# To-Do-List
 
-* Pagina lista de Tarefas
+Pagina lista de Tarefas
 
-* Utiliza as tecnologias:
+Utiliza as tecnologias:
 * HTML
 * CSS
 * Js
