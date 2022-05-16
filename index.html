@@ -9,16 +9,34 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-      <div class="div-head">
-        <h1>To-Do-List</h1>
-        <input type="text" class="inpt-tarefa" id="inpt_tarefa" placeholder="Digite uma tarefa..">
-        <input type="button" value="+" class="btn-adicionar" id="btn_adicionar">
+    <header>
+      <div class="wrapper">
+        <h1>To-Do List</h1>
       </div>
-      <div class="alerta error">Insira uma tarefa válida!</div>
-      <div class="div-body">
-        <!-- <ul class="list-tasks"> -->
-        </ul>
+    </header>
+    <section>
+      <div class="wrapper">
+        <div class="todo-div">
+          <input
+            type="text"
+            class="inpt-tarefa"
+            id="inpt_tarefa"
+            placeholder="Digite uma tarefa.."
+          />
+          <input
+            type="button"
+            value="+"
+            class="btn-adicionar"
+            id="btn_adicionar"
+          />
+        </div>
+        <div class="alerta error">Insira uma tarefa válida!</div>
+        <!-- todo tasks -->
+        <div class="div-body">
+          <!-- <ul class="list-tasks"> -->
+        </div>
       </div>
+    </section>
     <script src="index.js"></script>
   </body>
 </html>
