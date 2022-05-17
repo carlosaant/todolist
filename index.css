@@ -9,6 +9,7 @@
 
   --primary-color: #626de5;
   --secondary-color: #aca8de;
+  --sup-color: #6cbaa1;
 
   --header-height: 10rem;
 }
@@ -34,6 +35,10 @@ header {
   background-color: var(--primary-color);
 }
 
+section {
+  padding-top: 1.5rem;
+}
+
 #todo::before {
   content: '';
   width: 100%;
@@ -50,6 +55,8 @@ header {
   width: min(50rem, 100%);
   margin-left: auto;
   margin-right: auto;
+
+  padding-inline: 1rem;
 }
 
 header h1 {
@@ -75,7 +82,7 @@ header h1 {
 .inpt-tarefa {
   padding: 1rem 2rem;
 
-  border: 1px solid rgb(170, 169, 169);
+  border: 1px solid var(--primary-color);
   border-radius: 3px;
 
   background-color: white;
@@ -83,16 +90,15 @@ header h1 {
   text-align: center;
 
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 18px;
+  font-size: 1.6rem;
 }
 .inpt-tarefa:focus {
-  border: 1px solid rgb(117, 115, 115);
-  background-color: #e6f4f1;
+  border: 1px solid var(--sup-color);
   outline: none;
 }
 
 .btn-adicionar {
-  background-color: #4caf50;
+  background-color: var(--primary-color);
   border: none;
   color: white;
   padding: 12px 20px;
@@ -101,11 +107,11 @@ header h1 {
   font-weight: bold;
 }
 .btn-adicionar:hover {
-  background-color: #5cdf00;
+  background-color: var(--sup-color);
 }
 
 .div-body {
-  width: 500px;
+  /* width: 500px; */
   /* height: 180px; */
   background-color: #f8f8ff;
 
