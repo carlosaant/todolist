@@ -10,6 +10,8 @@
   --primary-color: #626de5;
   --secondary-color: #aca8de;
   --sup-color: #6cbaa1;
+  --ap-color: #f1edff;
+  --tasks-color: #ec9e9e;
 
   --header-height: 10rem;
 }
@@ -110,108 +112,21 @@ header h1 {
   background-color: var(--sup-color);
 }
 
-.div-body {
-  /* width: 500px; */
-  /* height: 180px; */
-  background-color: #f8f8ff;
+.tasks {
+  width: 100%;
+  padding-block: 2rem;
 
-  margin: auto;
-  margin-top: 5px;
-
-  border-radius: 10px;
-
-  text-align: center;
+  background-color: var(--tasks-color);
+  display: flex;
+  flex-direction: column;
 }
 
-.list-tasks {
+#todo-tasks ul {
   list-style: none;
-  font-size: 18px;
-  padding: 5px;
 }
 
-.list-tasks li {
-  max-width: 400px;
-  background-color: #8a8dba;
-  color: #f8f8ff;
-  padding: 12px 18px;
-  border-radius: 2px;
-  border: 1px solid white;
-  margin: auto;
-  display: block;
-  position: relative;
-
-  overflow: hidden;
-}
-
-.list-tasks li:hover {
-  background-color: #67698b;
-}
-
-.list-tasks li button {
-  /* background-color: transparent; */
-  background-image: url('./assets/excluir.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #fbeaff;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-
-  border: none;
-
-  padding: 16px 16px;
-  border-radius: 3px;
-  margin-right: 2px;
-  margin-top: 1px;
-
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 15px;
-  font-weight: bold;
-
-  cursor: pointer;
-
-  position: absolute;
-  top: 47%;
-  right: 0%;
-  transform: translate(0%, -50%);
-}
-
-.list-tasks li button:hover {
-  background-image: url('./assets/excluir.png');
-  background-color: #2ee59d;
-  box-shadow: 0px 10px 15px rgba(46, 229, 157, 0.4);
-}
-
-.list-tasks input[type='checkbox'] {
-  width: 25px;
-  height: 25px;
-  border: 1px solid #4b4453;
-  border-radius: 2px;
-
-  position: absolute;
-  top: 50%;
-  left: 0%;
-  transform: translate(0%, -50%);
-  margin-left: 2px;
-}
-
-.alerta {
-  display: none;
-
-  width: 500px;
-  padding: 15px;
-  border: 1px solid gray;
-  border-radius: 3px;
-  margin: auto;
-  margin-top: 5px;
-  font-size: 18px;
-  text-align: center;
-}
-.error {
-  border-color: #e8273b;
-  color: #fff;
-  background-color: #ed5565;
-}
-
-.borda-error {
-  border: 2px solid red;
+#todo-tasks ul li {
+  padding-inline: 1rem;
+  background-color: var(--ap-color);
+  margin-block: 0.1rem;
 }
