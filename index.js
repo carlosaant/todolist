@@ -1,6 +1,6 @@
 let btn_adicionar;
 let inpt_tarefa;
-let body_tarefas;
+let div_tasks;
 let alerta_error;
 
 let _tarefas = [];
@@ -18,11 +18,9 @@ onload = function () {
   //ao carregar a pagina, faz a captura dos elementos HTML
   inpt_tarefa = document.getElementById('inpt_tarefa');
   btn_adicionar = document.getElementById('btn_adicionar');
-  body_tarefas = document.querySelector('.div-body');
-  alerta_error = document.querySelector('.alerta');
-  alerta_error.style.display = 'none';
+  div_tasks = document.querySelector('.tasks');
 
-  btn_adicionar.addEventListener('click');
+  btn_adicionar.addEventListener('click', adcionarTarefa);
 
   /*
         caso haja itens no localstorage, chama a funçao para carregar o Array com as tarefas armazenadas
@@ -40,15 +38,15 @@ onload = function () {
     funcionando como um filtro basico, caso há um valor valido, chama a funçao criarTarefa passando o
     dado digitado pelo usuario, retirando qualquer espaço antes ou depois das palavras.
 */
-// function adcionarTarefa() {
-//   if (inpt_tarefa.value.trim() === ""){ //trim() retira os espaços para comparaçao
-//     errorInsere();
-//   }
-//   else{
-//     criarTarefa(inpt_tarefa.value.trim());
-//     limpaCampo();
-//   }
-// }
+function adcionarTarefa() {
+  if (inpt_tarefa.value.trim() === '') {
+    //trim() retira os espaços para comparaçao
+    // errorInsere();
+  } else {
+    criarTarefa(inpt_tarefa.value.trim());
+    // limpaCampo();
+  }
+}
 
 function criarTarefa(tarefa) {
   let tarefa_adc = new tarefa_un(tarefa);

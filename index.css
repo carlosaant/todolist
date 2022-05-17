@@ -103,9 +103,11 @@ header h1 {
   background-color: var(--primary-color);
   border: none;
   color: white;
-  padding: 12px 20px;
+  padding: 1rem 2rem;
   text-decoration: none;
 
+  font-size: 1.4rem;
+  text-transform: uppercase;
   font-weight: bold;
 }
 .btn-adicionar:hover {
@@ -122,6 +124,8 @@ header h1 {
   background-color: var(--primary-color);
   display: flex;
   flex-direction: column;
+
+  border-radius: 3px;
 
   overflow-y: scroll;
 }
