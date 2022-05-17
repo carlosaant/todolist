@@ -115,10 +115,15 @@ header h1 {
 .tasks {
   width: 100%;
   padding-block: 2rem;
+  padding-inline: 2rem;
 
-  background-color: var(--tasks-color);
+  max-height: 20rem;
+
+  background-color: var(--primary-color);
   display: flex;
   flex-direction: column;
+
+  overflow-y: scroll;
 }
 
 #todo-tasks ul {
@@ -127,6 +132,28 @@ header h1 {
 
 #todo-tasks ul li {
   padding-inline: 1rem;
+  padding-block: 1rem;
   background-color: var(--ap-color);
+
   margin-block: 0.1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#todo-tasks ul li p {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 1.6rem;
+  line-height: 150%;
+
+  /* para nao quebrar o li */
+  overflow: hidden;
+}
+
+#todo-tasks ul li .controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
