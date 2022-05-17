@@ -4,6 +4,7 @@ let div_tasks;
 let alerta_error;
 
 let _tarefas = [];
+let _li_tarefas = [];
 
 //----------------------------------------------------------------------
 class tarefa_un {
@@ -42,6 +43,7 @@ function adcionarTarefa() {
   if (inpt_tarefa.value.trim() === '') {
     //trim() retira os espaços para comparaçao
     // errorInsere();
+    alert('error');
   } else {
     criarTarefa(inpt_tarefa.value.trim());
     // limpaCampo();
@@ -58,6 +60,28 @@ function criarTarefa(tarefa) {
 // function carregarTarefas(){
 //     _tarefas = JSON.parse(localStorage.getItem(localStorage.key("tarefas-todo")));
 // }
+
+function createLiElementTask(tarefa) {
+  const li_tarefa = document.createElement('li');
+  const text_tarefa = document.createElement('p');
+  const div_controls = document.createElement('div');
+  const check_tarefa = document.createElement('input');
+  const del_tarefa = document.createElement('input');
+
+  check_tarefa.type = 'checkbox';
+  del_tarefa.type = 'button';
+  del_tarefa.value = 'Del';
+  div_controls.classList = 'controls';
+  text_tarefa.textContent = tarefa;
+
+  div_controls.appendChild(check_tarefa);
+  div_controls.appendChild(del_tarefa);
+
+  li_tarefa.appendChild(text_tarefa);
+  li_tarefa.appendChild(div_controls);
+
+  return li_tarefa;
+}
 
 // ------------------------------- Funçoes de Apoio -----------------
 
