@@ -27,6 +27,8 @@ onload = function () {
   if (localStorage.length > 0) {
     carregarTarefas();
     renderTasksOnScreen();
+
+    displayTasksDiv();
     console.log(_tarefas); //-----------------------------------------
   }
 };
@@ -51,6 +53,8 @@ function criarTarefa(tarefa) {
   const tarefa_adc = new tarefa_un(tarefa); //retorna um obj tarefa
   _tarefas.unshift(tarefa_adc); //insere no começo do array
   setLocalSt(_tarefas);
+  // verifica para tirar o hidder inicial da div
+  displayTasksDiv();
   renderTasksOnScreen();
 }
 
@@ -63,6 +67,8 @@ function renderTasksOnScreen() {
   }
   // insere filho recebendo ul criada com os itens
   div_tasks.appendChild(createListOfItensTaks());
+
+  // pode verificar se a ul ja existe, senao cria ela, ai no caso só adicionaria os elementos li
 }
 
 function createListOfItensTaks() {
@@ -139,8 +145,8 @@ function carregarTarefas() {
 function displayTasksDiv() {
   const div_tasks = document.querySelector('.tasks');
   if (_tarefas.length == 0) {
-    div_tasks.style.display = 'none';
+    div_tasks.style.visibility = 'hidden';
   } else {
-    div_tasks.style.display = 'flex';
+    div_tasks.style.visibility = 'visible';
   }
 }
