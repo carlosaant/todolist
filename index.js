@@ -1,10 +1,8 @@
 let btn_adicionar;
 let inpt_tarefa;
-let div_tasks;
 let alerta_error;
 
 let _tarefas = [];
-let _li_tarefas = [];
 
 //----------------------------------------------------------------------
 class tarefa_un {
@@ -19,7 +17,6 @@ onload = function () {
   //ao carregar a pagina, faz a captura dos elementos HTML
   inpt_tarefa = document.getElementById('inpt_tarefa');
   btn_adicionar = document.getElementById('btn_adicionar');
-  div_tasks = document.querySelector('.tasks');
 
   btn_adicionar.addEventListener('click', adcionarTarefa);
 
@@ -27,11 +24,11 @@ onload = function () {
         caso haja itens no localstorage, chama a funçao para carregar o Array com as tarefas armazenadas
         e em seguida exibe na tela em sequencia.
 //  */
-  //   if(localStorage.length>0){
-  //          carregarTarefas();
-  //          exibeTarefas();
-  //         console.log(_tarefas);//-----------------------------------------
-  //   }
+  if (localStorage.length > 0) {
+    carregarTarefas();
+    renderTasksOnScreen();
+    console.log(_tarefas); //-----------------------------------------
+  }
 };
 
 /*
@@ -43,7 +40,7 @@ function adcionarTarefa() {
   if (inpt_tarefa.value.trim() === '') {
     //trim() retira os espaços para comparaçao
     // errorInsere();
-    alert('error');
+    alert('Insira uma Tarefa válida!');
   } else {
     criarTarefa(inpt_tarefa.value.trim());
     // limpaCampo();
@@ -51,19 +48,30 @@ function adcionarTarefa() {
 }
 
 function criarTarefa(tarefa) {
-  let tarefa_adc = new tarefa_un(tarefa);
+  const tarefa_adc = new tarefa_un(tarefa); //retorna um obj tarefa
   _tarefas.unshift(tarefa_adc); //insere no começo do array
   setLocalSt(_tarefas);
-  // exibeTarefas();
+  renderTasksOnScreen();
 }
 
-// function carregarTarefas(){
-//     _tarefas = JSON.parse(localStorage.getItem(localStorage.key("tarefas-todo")));
-// }
+// renderiza todos os itens de uma vez
+function renderTasksOnScreen() {
+  const div_tasks = document.querySelector('.tasks');
+  // percorre os filhos dentro da div_tasks e remove - limpa os elementos
+  for (const child of div_tasks.children) {
+    child.remove();
+  }
+  // insere filho recebendo ul criada com os itens
+  div_tasks.appendChild(createListOfItensTaks());
+}
+
 function createListOfItensTaks() {
+  const ul_tarefas = document.createElement('ul');
   _tarefas.forEach(function (item) {
-    // açoes aqui
+    //passa o obj tarefa e recebe .appendchild o Li construido
+    ul_tarefas.appendChild(createLiItemTask(item));
   });
+  return ul_tarefas;
 }
 
 function createLiItemTask(tarefa) {
@@ -76,8 +84,9 @@ function createLiItemTask(tarefa) {
   check_tarefa.type = 'checkbox';
   del_tarefa.type = 'button';
   del_tarefa.value = 'Del';
+  del_tarefa.addEventListener('click', deleteTarefa);
   div_controls.classList = 'controls';
-  text_tarefa.textContent = tarefa;
+  text_tarefa.textContent = tarefa.task;
 
   div_controls.appendChild(check_tarefa);
   div_controls.appendChild(del_tarefa);
@@ -90,6 +99,24 @@ function createLiItemTask(tarefa) {
 
 // ------------------------------- Funçoes de Apoio -----------------
 
+function deleteTarefa() {
+  alert('voce clicou em uma tarefa para deletar!');
+}
+
 function setLocalSt(arrTarefas) {
   localStorage.setItem('tarefas-todo', JSON.stringify(arrTarefas));
+}
+
+function carregarTarefas() {
+  _tarefas = JSON.parse(localStorage.getItem(localStorage.key('tarefas-todo')));
+}
+
+// function verifica se a lista de tarefas tem itens, caso nao tenha dar um display none na div .tasks
+function displayTasksDiv() {
+  const div_tasks = document.querySelector('.tasks');
+  if (_tarefas.length == 0) {
+    div_tasks.style.display = 'none';
+  } else {
+    div_tasks.style.display = 'flex';
+  }
 }
