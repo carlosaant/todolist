@@ -60,8 +60,13 @@ function criarTarefa(tarefa) {
 // function carregarTarefas(){
 //     _tarefas = JSON.parse(localStorage.getItem(localStorage.key("tarefas-todo")));
 // }
+function createListOfItensTaks() {
+  _tarefas.forEach(function (item) {
+    // açoes aqui
+  });
+}
 
-function createLiElementTask(tarefa) {
+function createLiItemTask(tarefa) {
   const li_tarefa = document.createElement('li');
   const text_tarefa = document.createElement('p');
   const div_controls = document.createElement('div');
