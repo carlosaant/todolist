@@ -67,6 +67,7 @@ function renderTasksOnScreen() {
 
 function createListOfItensTaks() {
   const ul_tarefas = document.createElement('ul');
+  ul_tarefas.id = 'todo-ul';
   _tarefas.forEach(function (item) {
     //passa o obj tarefa e recebe .appendchild o Li construido
     ul_tarefas.appendChild(createLiItemTask(item));
@@ -84,8 +85,14 @@ function createLiItemTask(tarefa) {
   check_tarefa.type = 'checkbox';
   del_tarefa.type = 'button';
   del_tarefa.value = 'Del';
-  del_tarefa.addEventListener('click', deleteTarefa);
+
+  // caso fosse inserido ID na tarefa LI, poderia ter criado o setAtribute e chamado a funçao delete passando o ID
+  del_tarefa.onclick = function () {
+    // retorna o elemento pai do pai (no caso o li)
+    deleteTarefa(this.parentNode.parentNode);
+  };
   div_controls.classList = 'controls';
+
   text_tarefa.textContent = tarefa.task;
 
   div_controls.appendChild(check_tarefa);
@@ -99,8 +106,25 @@ function createLiItemTask(tarefa) {
 
 // ------------------------------- Funçoes de Apoio -----------------
 
-function deleteTarefa() {
-  alert('voce clicou em uma tarefa para deletar!');
+function deleteTarefa(elem) {
+  console.log(elem);
+  const index = buscaIndexTarefaArray(elem.children[0].textContent);
+  if (index === _tarefas.length) {
+    alert('Nao Foi possivel Excluir!');
+  } else {
+    document.getElementById('todo-ul').removeChild(elem);
+    _tarefas.splice(index, 1);
+    setLocalSt(_tarefas);
+  }
+  displayTasksDiv();
+}
+
+function buscaIndexTarefaArray(tarefa_text) {
+  for (let index = 0; index < _tarefas.length; index++) {
+    if (_tarefas[index].task === tarefa_text) {
+      return index;
+    }
+  }
 }
 
 function setLocalSt(arrTarefas) {
