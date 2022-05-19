@@ -1,6 +1,8 @@
 let btn_adicionar;
 let inpt_tarefa;
-let alerta_error;
+let spn_caracteres;
+
+const caracterLimite = 50;
 
 let _tarefas = [];
 
@@ -17,7 +19,11 @@ onload = function () {
   //ao carregar a pagina, faz a captura dos elementos HTML
   inpt_tarefa = document.getElementById('inpt_tarefa');
   btn_adicionar = document.getElementById('btn_adicionar');
+  spn_caracteres = document.getElementById('caracRest');
 
+  inpt_tarefa.addEventListener('input', function () {
+    inputCaracter(this);
+  });
   btn_adicionar.addEventListener('click', adcionarTarefa);
 
   /*
@@ -169,6 +175,13 @@ function displayTasksDiv() {
   } else {
     div_tasks.style.visibility = 'visible';
   }
+}
+
+function inputCaracter(elem) {
+  let caracterDigitado = elem.value.length;
+  let caracterRestante = caracterLimite - caracterDigitado;
+
+  spn_caracteres.textContent = caracterRestante;
 }
 
 function limpaCampoTarefa() {

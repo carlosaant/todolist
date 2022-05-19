@@ -12,6 +12,7 @@
     <header>
       <div class="wrapper">
         <h1>To-Do List</h1>
+        <h2>mini</h2>
       </div>
     </header>
     <section id="todo">
@@ -23,8 +24,12 @@
               class="inpt-tarefa"
               id="inpt_tarefa"
               placeholder="Digite uma tarefa.."
+              maxlength="50"
             />
-            <span id="caracRest">Restante: 255</span>
+            <span>
+              Restante:
+              <span id="caracRest"></span>
+            </span>
           </div>
           <input
             type="button"

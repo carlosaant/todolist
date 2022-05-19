@@ -110,10 +110,14 @@ header h1 {
   outline: none;
 }
 
-#caracRest {
+.todo-text-div span {
   font-size: 1.2rem;
   padding-top: 0.5rem;
   color: var(--ap-color);
+}
+
+#caracRest {
+  color: var(--primary-color);
 }
 
 .btn-adicionar {
