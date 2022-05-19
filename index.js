@@ -90,7 +90,7 @@ function createLiItemTask(tarefa) {
 
   check_tarefa.type = 'checkbox';
   del_tarefa.type = 'button';
-  del_tarefa.value = 'Del';
+  // del_tarefa.value = 'Del';
 
   // caso fosse inserido ID na tarefa LI, poderia ter criado o setAtribute e chamado a funçao delete passando o ID
   del_tarefa.onclick = function () {

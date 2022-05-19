@@ -161,3 +161,18 @@ header h1 {
   align-items: center;
   gap: 1rem;
 }
+
+.controls input[type='button'] {
+  border: 1px solid transparent;
+  border-radius: 2px;
+  width: 2.5rem;
+  height: 2.6rem;
+  background-color: var(--secondary-color);
+  background-image: url('./assets/icon-remover.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.controls input[type='button']:hover {
+  border: 1px solid var(--primary-color);
+}
