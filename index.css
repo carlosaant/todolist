@@ -27,6 +27,8 @@ body {
 
   background: #fff; /* fallback for old browsers */
   font-family: 'Courier New', Courier, monospace;
+
+  overflow: overlay;
 }
 
 header {
