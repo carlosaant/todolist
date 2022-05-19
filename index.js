@@ -43,9 +43,10 @@ function adcionarTarefa() {
     //trim() retira os espaços para comparaçao
     // errorInsere();
     alert('Insira uma Tarefa válida!');
+    limpaCampoTarefa();
   } else {
     criarTarefa(inpt_tarefa.value.trim());
-    // limpaCampo();
+    limpaCampoTarefa();
   }
 }
 
@@ -149,4 +150,8 @@ function displayTasksDiv() {
   } else {
     div_tasks.style.visibility = 'visible';
   }
+}
+
+function limpaCampoTarefa() {
+  inpt_tarefa.value = '';
 }

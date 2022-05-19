@@ -119,15 +119,13 @@ header h1 {
   padding-block: 2rem;
   padding-inline: 2rem;
 
-  max-height: 20rem;
-
   background-color: var(--primary-color);
   display: flex;
   flex-direction: column;
 
   border-radius: 3px;
 
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 #todo-tasks ul {
