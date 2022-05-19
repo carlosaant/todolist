@@ -96,6 +96,8 @@ header h1 {
 
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.6rem;
+
+  transition: 0.5s;
 }
 .inpt-tarefa:focus {
   border: 1px solid var(--sup-color);
@@ -112,6 +114,8 @@ header h1 {
   font-size: 1.4rem;
   text-transform: uppercase;
   font-weight: bold;
+
+  transition: 0.5s;
 }
 .btn-adicionar:hover {
   background-color: var(--sup-color);
@@ -175,6 +179,8 @@ header h1 {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+
+  transition: 0.5s;
 }
 .controls input[type='button']:hover {
   border: 1px solid var(--primary-color);
@@ -213,4 +219,8 @@ header h1 {
 
 .controls input[type='checkbox']:checked::before {
   transform: scale(1);
+}
+
+.markedText {
+  text-decoration: line-through;
 }

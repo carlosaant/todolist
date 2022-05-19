@@ -90,9 +90,12 @@ function createLiItemTask(tarefa) {
   const del_tarefa = document.createElement('input');
 
   check_tarefa.type = 'checkbox';
-  del_tarefa.type = 'button';
-  // del_tarefa.value = 'Del';
+  check_tarefa.checked = tarefa.checked;
+  check_tarefa.onchange = function () {
+    checkTarefa(this.parentNode.parentNode, this.checked);
+  };
 
+  del_tarefa.type = 'button';
   // caso fosse inserido ID na tarefa LI, poderia ter criado o setAtribute e chamado a funçao delete passando o ID
   del_tarefa.onclick = function () {
     // retorna o elemento pai do pai (no caso o li)
@@ -101,6 +104,10 @@ function createLiItemTask(tarefa) {
   div_controls.classList = 'controls';
 
   text_tarefa.textContent = tarefa.task;
+
+  if (tarefa.checked) {
+    text_tarefa.classList.add('markedText');
+  }
 
   div_controls.appendChild(check_tarefa);
   div_controls.appendChild(del_tarefa);
@@ -111,13 +118,10 @@ function createLiItemTask(tarefa) {
   return li_tarefa;
 }
 
-// ------------------------------- Funçoes de Apoio -----------------
-
 function deleteTarefa(elem) {
-  console.log(elem);
   const index = buscaIndexTarefaArray(elem.children[0].textContent);
   if (index === _tarefas.length) {
-    alert('Nao Foi possivel Excluir!');
+    alert('Nao foi possivel excluir a tarefa!');
   } else {
     document.getElementById('todo-ul').removeChild(elem);
     _tarefas.splice(index, 1);
@@ -125,6 +129,21 @@ function deleteTarefa(elem) {
   }
   displayTasksDiv();
 }
+
+function checkTarefa(elem, status) {
+  const index = buscaIndexTarefaArray(elem.children[0].textContent);
+  if (index === _tarefas.length) {
+    alert('Nao foi possivel alterar a tarefa!');
+  } else {
+    status
+      ? elem.children[0].classList.add('markedText')
+      : elem.children[0].classList.remove('markedText');
+    _tarefas[index].checked = status;
+    setLocalSt(_tarefas);
+  }
+}
+
+// ------------------------------- Funçoes de Apoio -----------------
 
 function buscaIndexTarefaArray(tarefa_text) {
   for (let index = 0; index < _tarefas.length; index++) {
