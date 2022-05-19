@@ -77,11 +77,17 @@ header h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem;
 
   border-radius: 5px;
   background-color: var(--secondary-color);
+}
+
+.todo-div .todo-text-div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .inpt-tarefa {
@@ -104,14 +110,20 @@ header h1 {
   outline: none;
 }
 
+#caracRest {
+  font-size: 1.2rem;
+  padding-top: 0.5rem;
+  color: var(--ap-color);
+}
+
 .btn-adicionar {
   background-color: var(--primary-color);
-  border: none;
+  border: 1px solid transparent;
   color: white;
   padding: 1rem 2rem;
   text-decoration: none;
 
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   text-transform: uppercase;
   font-weight: bold;
 
