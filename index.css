@@ -177,6 +177,9 @@ header h1 {
 .controls input[type='button']:hover {
   border: 1px solid var(--primary-color);
 }
+.controls input[type='button']:active {
+  background-color: var(--tasks-color);
+}
 
 .controls input[type='checkbox'] {
   appearance: none;
