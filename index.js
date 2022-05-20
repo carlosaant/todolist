@@ -33,8 +33,7 @@ onload = function () {
   if (localStorage.length > 0) {
     carregarTarefas();
     renderTasksOnScreen();
-
-    displayTasksDiv();
+    // displayTasksDiv();
     console.log(_tarefas); //-----------------------------------------
   }
 };
@@ -196,5 +195,8 @@ function displayTasksDiv() {
     const sec_tasks = document.getElementById('todo-tasks');
     const div_tasks = document.querySelector('.tasks');
     sec_tasks.children[0].removeChild(div_tasks);
+
+    //caso não haja tarefas, é removido do localstorage o array de tarefas
+    localStorage.removeItem('tarefas-todo');
   }
 }
