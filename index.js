@@ -1,6 +1,6 @@
-let btn_adicionar;
-let inpt_tarefa;
-let spn_caracteres;
+let inpt_tarefa = document.getElementById('inpt_tarefa');
+let btn_adicionar = document.getElementById('btn_adicionar');
+let spn_caracteres = document.getElementById('caracRest');
 
 const caracterLimite = 50;
 
@@ -14,18 +14,17 @@ class tarefa_un {
   }
 }
 //----------------------------------------------------------------------
-//get elementos HTML
-onload = function () {
-  //ao carregar a pagina, faz a captura dos elementos HTML
-  inpt_tarefa = document.getElementById('inpt_tarefa');
-  btn_adicionar = document.getElementById('btn_adicionar');
-  spn_caracteres = document.getElementById('caracRest');
 
+onload = function () {
+  //eventos ==============================
   inpt_tarefa.addEventListener('input', function () {
     inputCaracter(this);
   });
   btn_adicionar.addEventListener('click', adcionarTarefa);
+  //======================================
 
+  //atualizar mostrador ao carregar pagina
+  inputCaracter(inpt_tarefa);
   /*
         caso haja itens no localstorage, chama a funçao para carregar o Array com as tarefas armazenadas
         e em seguida exibe na tela em sequencia.
@@ -33,8 +32,6 @@ onload = function () {
   if (localStorage.length > 0) {
     carregarTarefas();
     renderTasksOnScreen();
-    // displayTasksDiv();
-    console.log(_tarefas); //-----------------------------------------
   }
 };
 
@@ -52,6 +49,7 @@ function adcionarTarefa() {
   } else {
     criarTarefa(inpt_tarefa.value.trim());
     limpaCampoTarefa();
+    inputCaracter(inpt_tarefa);
   }
 }
 
