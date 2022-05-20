@@ -45,8 +45,8 @@ onload = function () {
     dado digitado pelo usuario, retirando qualquer espaço antes ou depois das palavras.
 */
 function adcionarTarefa() {
+  //trim() retira os espaços para comparaçao
   if (inpt_tarefa.value.trim() === '') {
-    //trim() retira os espaços para comparaçao
     // errorInsere();
     alert('Insira uma Tarefa válida!');
     limpaCampoTarefa();
@@ -61,12 +61,13 @@ function criarTarefa(tarefa) {
   _tarefas.unshift(tarefa_adc); //insere no começo do array
   setLocalSt(_tarefas);
   // verifica para tirar o hidder inicial da div
-  displayTasksDiv();
+  // displayTasksDiv();
   renderTasksOnScreen();
 }
 
 // renderiza todos os itens de uma vez
 function renderTasksOnScreen() {
+  checkElementExists();
   const div_tasks = document.querySelector('.tasks');
   // percorre os filhos dentro da div_tasks e remove - limpa os elementos
   for (const child of div_tasks.children) {
@@ -167,16 +168,6 @@ function carregarTarefas() {
   _tarefas = JSON.parse(localStorage.getItem(localStorage.key('tarefas-todo')));
 }
 
-// function verifica se a lista de tarefas tem itens, caso nao tenha dar um display none na div .tasks
-function displayTasksDiv() {
-  const div_tasks = document.querySelector('.tasks');
-  if (_tarefas.length == 0) {
-    div_tasks.style.visibility = 'hidden';
-  } else {
-    div_tasks.style.visibility = 'visible';
-  }
-}
-
 function inputCaracter(elem) {
   let caracterDigitado = elem.value.length;
   let caracterRestante = caracterLimite - caracterDigitado;
@@ -186,4 +177,24 @@ function inputCaracter(elem) {
 
 function limpaCampoTarefa() {
   inpt_tarefa.value = '';
+}
+
+function checkElementExists() {
+  // se o a div .tasks não existir, é criada
+  if (!document.querySelector('.tasks')) {
+    //criar elemento dentro do wrapper e atribuir a classe .tasks
+    const sec_tasks = document.getElementById('todo-tasks');
+    const div_tasks = document.createElement('div');
+    div_tasks.classList.add('tasks');
+    sec_tasks.children[0].appendChild(div_tasks);
+  }
+}
+
+// function verifica se a lista de tarefas tem itens, caso nao tenha remove a div_tasks da pagina para nao aparecer vazia
+function displayTasksDiv() {
+  if (_tarefas.length == 0) {
+    const sec_tasks = document.getElementById('todo-tasks');
+    const div_tasks = document.querySelector('.tasks');
+    sec_tasks.children[0].removeChild(div_tasks);
+  }
 }
