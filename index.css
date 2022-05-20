@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sarabun&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -14,6 +17,9 @@
   --tasks-color: #ec9e9e;
 
   --header-height: 10rem;
+
+  --font-tittle: font-family: 'Permanent Marker', cursive;
+  --font-body: font-family: 'Sarabun', sans-serif;
 }
 
 html,
@@ -26,7 +32,7 @@ body {
   font-size: 1.6rem;
 
   background: #fff; /* fallback for old browsers */
-  font-family: 'Courier New', Courier, monospace;
+  font-family: var(--font-body);
 
   overflow: overlay;
 }
@@ -67,7 +73,13 @@ header h1 {
   font-size: 3.4rem;
   line-height: 130%;
 
-  color: #f1edff;
+  color: var(--ap-color);
+  font-family: var(--font-tittle);
+}
+header h2{
+  font-size: 2.4rem;
+  font-family: var(--font-tittle);
+  color: var(--ap-color);
 }
 
 .todo-div {
@@ -100,7 +112,7 @@ header h1 {
   color: black;
   text-align: center;
 
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
   font-size: 1.6rem;
 
   transition: 0.5s;
@@ -168,7 +180,7 @@ header h1 {
 }
 
 #todo-tasks ul li p {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
 
   font-size: 1.6rem;
   line-height: 150%;
