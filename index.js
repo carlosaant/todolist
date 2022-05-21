@@ -46,6 +46,7 @@ function adcionarTarefa() {
     errorInsere();
     // alert('Insira uma Tarefa válida!');
     limpaCampoTarefa();
+    inputCaracter(inpt_tarefa);
   } else {
     criarTarefa(inpt_tarefa.value.trim());
     limpaCampoTarefa();
@@ -201,7 +202,6 @@ function displayTasksDiv() {
 
 function errorInsere() {
   inpt_tarefa.classList.add('inpErrorFocus');
-  inpt_tarefa.focus();
   const timeout = setTimeout(function () {
     inpt_tarefa.classList.remove('inpErrorFocus');
   }, 500);
