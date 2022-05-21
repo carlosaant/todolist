@@ -6,19 +6,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do-List ProgBR - Carlos</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Sarabun&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
-      <div class="div-head">
-        <h1>To-Do-List</h1>
-        <input type="text" class="inpt-tarefa" id="inpt_tarefa" placeholder="Digite uma tarefa..">
-        <input type="button" value="+" class="btn-adicionar" id="btn_adicionar">
+    <header>
+      <div class="wrapper">
+        <h1>To-Do List</h1>
+        <h2>mini</h2>
       </div>
-      <div class="alerta error">Insira uma tarefa válida!</div>
-      <div class="div-body">
-        <!-- <ul class="list-tasks"> -->
-        </ul>
+    </header>
+    <section id="todo">
+      <div class="wrapper">
+        <div class="todo-div">
+          <div class="todo-text-div">
+            <input
+              type="text"
+              class="inpt-tarefa"
+              id="inpt_tarefa"
+              placeholder="Digite uma tarefa.."
+              maxlength="50"
+            />
+            <span>
+              Restante:
+              <span id="caracRest"></span>
+            </span>
+          </div>
+          <input
+            type="button"
+            value="Adicionar"
+            class="btn-adicionar"
+            id="btn_adicionar"
+          />
+        </div>
       </div>
+    </section>
+    <!-- todo tasks -->
+    <section id="todo-tasks">
+      <div class="wrapper">
+        <!-- tasks -->
+        <!-- <div class="tasks">
+          
+        </div> -->
+      </div>
+    </section>
     <script src="index.js"></script>
   </body>
 </html>

@@ -1,168 +1,287 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Courier New", Courier, monospace;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 62.5%;
+
+  --primary-color: #626de5;
+  --secondary-color: #aca8de;
+  --sup-color: #6cbaa1;
+  --ap-color: #f1edff;
+  --tasks-color: #ec9e9e;
+
+  --header-height: 15rem;
+
+  --font-tittle: 'Permanent Marker', cursive;
+  --font-body: 'Sarabun', sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
 }
 
 body {
-  background: #5E6FC2; /* fallback for old browsers */
+  font-size: 1.6rem;
+
+  background: #fff; /* fallback for old browsers */
+  font-family: var(--font-body);
+
+  overflow: overlay;
 }
 
-.div-head {
-  width: 500px;
-  height: 180px;
-  background-color: #F8F8FF;
-
-  margin: auto;
-  margin-top: 5px;
-
-  border-radius: 10px;
-
+header {
+  padding-block: 3rem;
+  height: var(--header-height);
   text-align: center;
+
+  background-color: var(--primary-color);
 }
 
-.div-head h1 {
-  text-align: center;
-  font-size: 3rem;
+section {
+  padding-top: 1.5rem;
+}
+
+#todo::before {
+  content: '';
+  width: 100%;
+  height: calc(var(--header-height));
+  display: block;
+  background-color: var(--primary-color);
+  position: absolute;
+  top: var(--header-height);
+  left: 0;
+  z-index: -1;
+}
+
+.wrapper {
+  width: min(50rem, 100%);
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-inline: 1rem;
+}
+
+header h1 {
+  font-size: 3.4rem;
+  line-height: 130%;
+
+  color: var(--ap-color);
+  font-family: var(--font-tittle);
+}
+header h2 {
+  font-size: 2.4rem;
+  font-family: var(--font-tittle);
+  color: var(--ap-color);
+}
+
+.todo-div {
+  width: 100%;
+  padding-block: 7rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+
+  border-radius: 5px;
+  background-color: var(--secondary-color);
+}
+
+.todo-div .todo-text-div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 3rem;
 }
 
 .inpt-tarefa {
-  padding: 12px 20px;
-  margin: 8px 0;
-  margin-top: 20px;
-  box-sizing: border-box;
+  padding: 1rem 2rem;
 
-  border: 2px solid rgb(170, 169, 169);
+  border: 1px solid var(--primary-color);
   border-radius: 3px;
 
   background-color: white;
-  color: black;  
+  color: black;
   text-align: center;
 
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 18px;
+  font-family: var(--font-body);
+  font-size: 1.6rem;
+
+  transition: 0.5s;
 }
 .inpt-tarefa:focus {
-  border: 2px solid rgb(117, 115, 115);
-  background-color: #E6F4F1;
+  border: 1px solid var(--sup-color);
   outline: none;
 }
 
+.todo-text-div span {
+  font-size: 1.2rem;
+  padding-top: 0.5rem;
+  color: var(--ap-color);
+}
+
+#caracRest {
+  color: var(--primary-color);
+}
+
 .btn-adicionar {
-  background-color: #4caf50;
-  border: none;
+  background-color: var(--primary-color);
+  border: 1px solid transparent;
   color: white;
-  padding: 12px 20px;
+  padding: 1rem 2rem;
   text-decoration: none;
 
+  font-size: 1.6rem;
+  text-transform: uppercase;
   font-weight: bold;
+
+  transition: 0.5s;
 }
-.btn-adicionar:hover{
-    background-color: #5cdf00;
-}
-
-.div-body{
-  width: 500px;
-  /* height: 180px; */
-  background-color: #F8F8FF;
-
-  margin: auto;
-  margin-top: 5px;
-
-  border-radius: 10px;
-
-  text-align: center;
+.btn-adicionar:hover {
+  background-color: var(--sup-color);
 }
 
-.list-tasks{
+.tasks {
+  width: 100%;
+  padding-block: 2rem;
+  padding-inline: 2rem;
+
+  background-color: var(--primary-color);
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 3px;
+
+  /* overflow-y: scroll; */
+}
+
+#todo-tasks ul {
   list-style: none;
-  font-size: 18px;
-  padding: 5px;
-
 }
 
-.list-tasks li{
-  max-width: 400px;
-  background-color: #8A8DBA;
-  color: #F8F8FF;
-  padding: 12px 18px;
+#todo-tasks ul li {
+  padding-inline: 1rem;
+  padding-block: 1rem;
+  background-color: var(--ap-color);
+
+  margin-block: 0.1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#todo-tasks ul li p {
+  font-family: var(--font-body);
+
+  font-size: 1.6rem;
+  line-height: 150%;
+
+  /* para nao quebrar o li */
+  overflow: auto;
+}
+
+#todo-tasks ul li .controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  padding-left: 0.5rem;
+}
+
+.controls input[type='button'] {
+  border: 1px solid transparent;
   border-radius: 2px;
-  border: 1px solid white;
-  margin: auto;
-  display: block;
+  width: 2.5rem;
+  height: 2.6rem;
+  background-color: var(--secondary-color);
+  background-image: url('./assets/icon-remover.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  transition: 0.5s;
+}
+.controls input[type='button']:hover {
+  border: 1px solid var(--primary-color);
+}
+.controls input[type='button']:active {
+  background-color: var(--tasks-color);
+}
+
+.controls input[type='checkbox'] {
+  appearance: none;
+  background-color: var(--secondary-color);
+
+  font: inherit;
+  color: currentColor;
+  width: 2.15rem;
+  height: 2.15rem;
+  border: 1px solid transparent;
+  border-radius: 0.15em;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.controls input[type='checkbox']::before {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  transform: scale(0);
+  transition: 100ms transform ease-in-out;
+  box-shadow: inset 1rem 1rem var(--primary-color);
+
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.controls input[type='checkbox']:checked::before {
+  transform: scale(1);
+}
+
+.markedText {
+  /* text-decoration: line-through; */
   position: relative;
-
-  overflow: hidden;
 }
-
-.list-tasks li:hover{
-  background-color: #67698b;
-}
-
-.list-tasks li button{
-  /* background-color: transparent; */
-  background-image: url('./assets/excluir.png');
-  background-position:center;
-  background-repeat:no-repeat;
-  background-size: cover; 
-  background-color: #FBEAFF;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  
-  border: none;
-
-  padding: 16px 16px;
-  border-radius: 3px;
-  margin-right: 2px;
-  margin-top: 1px;
-
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 15px;
-  font-weight: bold;
-
-  cursor: pointer;
-
+.markedText:before {
+  border-bottom: 1px solid red;
   position: absolute;
-  top: 47%;
-  right: 0%;
-  transform: translate(0%, -50%);
+  content: '';
+  width: 100%;
+  height: 50%;
 }
 
-.list-tasks li button:hover{
-  background-image: url('./assets/excluir.png');
-  background-color: #2EE59D;
-  box-shadow: 0px 10px 15px rgba(46, 229, 157, 0.4);
+/* ---- */
+
+@keyframes treme {
+  0% {
+    margin-left: 0;
+  }
+  25% {
+    margin-left: 5px;
+  }
+  50% {
+    margin-left: 0;
+  }
+  75% {
+    margin-left: -5px;
+  }
+  100% {
+    margin-left: 0;
+  }
 }
 
-.list-tasks input[type="checkbox"]{
-  width: 25px;
-  height: 25px;
-  border: 1px solid #4B4453;
-  border-radius: 2px;
+.inpErrorFocus {
+  animation: treme 0.1s;
+  animation-iteration-count: 4;
 
-  position: absolute;
-  top: 50%;
-  left: 0%;
-  transform: translate(0%, -50%);
-  margin-left: 2px;
+  border: 1px solid red;
 }
-
-
-.alerta {
-  width: 500px;
-  padding: 15px;
-  border: 1px solid gray;
-  border-radius: 3px;
-  margin: auto;
-  margin-top: 5px;
-  font-size: 18px;
-  text-align: center;
- }
- .error {
-  border-color: #e8273b;
-  color: #FFF;
-  background-color: #ed5565;
- }
-
- .borda-error{
-  border: 2px solid red;
- }

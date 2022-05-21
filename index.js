@@ -1,36 +1,37 @@
-let btn_adicionar;
-let inpt_tarefa;
-let body_tarefas;
-let alerta_error;
+let inpt_tarefa = document.getElementById('inpt_tarefa');
+let btn_adicionar = document.getElementById('btn_adicionar');
+let spn_caracteres = document.getElementById('caracRest');
+
+const caracterLimite = 50;
 
 let _tarefas = [];
 
 //----------------------------------------------------------------------
 class tarefa_un {
-    constructor(tarefa) {
-        this.checked = false;
-        this.task = tarefa;
-    }
+  constructor(tarefa) {
+    this.checked = false;
+    this.task = tarefa;
+  }
 }
 //----------------------------------------------------------------------
-//get elementos HTML
- onload = function () {  //ao carregar a pagina, faz a captura dos elementos HTML
-  inpt_tarefa = document.getElementById("inpt_tarefa");
-  btn_adicionar = document.getElementById("btn_adicionar");
-  body_tarefas = document.querySelector(".div-body");
-  alerta_error = document.querySelector(".alerta");
-  alerta_error.style.display = "none";
 
-  btn_adicionar.addEventListener("click", adcionarTarefa);
+onload = function () {
+  //eventos ==============================
+  inpt_tarefa.addEventListener('input', function () {
+    inputCaracter(this);
+  });
+  btn_adicionar.addEventListener('click', adcionarTarefa);
+  //======================================
 
-/*
+  //atualizar mostrador ao carregar pagina
+  inputCaracter(inpt_tarefa);
+  /*
         caso haja itens no localstorage, chama a funçao para carregar o Array com as tarefas armazenadas
         e em seguida exibe na tela em sequencia.
- */
-  if(localStorage.length>0){
-         carregarTarefas();
-         exibeTarefas();
-        console.log(_tarefas);//-----------------------------------------
+//  */
+  if (localStorage.length > 0) {
+    carregarTarefas();
+    renderTasksOnScreen();
   }
 };
 
@@ -40,117 +41,168 @@ class tarefa_un {
     dado digitado pelo usuario, retirando qualquer espaço antes ou depois das palavras.
 */
 function adcionarTarefa() {
-  if (inpt_tarefa.value.trim() === ""){ //trim() retira os espaços para comparaçao
+  //trim() retira os espaços para comparaçao
+  if (inpt_tarefa.value.trim() === '') {
     errorInsere();
-  }
-  else{
+    // alert('Insira uma Tarefa válida!');
+    limpaCampoTarefa();
+    inputCaracter(inpt_tarefa);
+  } else {
     criarTarefa(inpt_tarefa.value.trim());
-    limpaCampo();
+    limpaCampoTarefa();
+    inputCaracter(inpt_tarefa);
   }
 }
-
 
 function criarTarefa(tarefa) {
-    let tarefa_adc = new tarefa_un(tarefa);
-    _tarefas.unshift(tarefa_adc); //insere no começo do array
+  const tarefa_adc = new tarefa_un(tarefa); //retorna um obj tarefa
+  _tarefas.unshift(tarefa_adc); //insere no começo do array
+  setLocalSt(_tarefas);
+  // verifica para tirar o hidder inicial da div
+  // displayTasksDiv();
+  renderTasksOnScreen();
+}
+
+// renderiza todos os itens de uma vez
+function renderTasksOnScreen() {
+  checkElementExists();
+  const div_tasks = document.querySelector('.tasks');
+  // percorre os filhos dentro da div_tasks e remove - limpa os elementos
+  for (const child of div_tasks.children) {
+    child.remove();
+  }
+  // insere filho recebendo ul criada com os itens
+  div_tasks.appendChild(createListOfItensTaks());
+
+  // pode verificar se a ul ja existe, senao cria ela, ai no caso só adicionaria os elementos li
+}
+
+function createListOfItensTaks() {
+  const ul_tarefas = document.createElement('ul');
+  ul_tarefas.id = 'todo-ul';
+  _tarefas.forEach(function (item) {
+    //passa o obj tarefa e recebe .appendchild o Li construido
+    ul_tarefas.appendChild(createLiItemTask(item));
+  });
+  return ul_tarefas;
+}
+
+function createLiItemTask(tarefa) {
+  const li_tarefa = document.createElement('li');
+  const text_tarefa = document.createElement('p');
+  const div_controls = document.createElement('div');
+  const check_tarefa = document.createElement('input');
+  const del_tarefa = document.createElement('input');
+
+  check_tarefa.type = 'checkbox';
+  check_tarefa.checked = tarefa.checked;
+  check_tarefa.onchange = function () {
+    checkTarefa(this.parentNode.parentNode, this.checked);
+  };
+
+  del_tarefa.type = 'button';
+  // caso fosse inserido ID na tarefa LI, poderia ter criado o setAtribute e chamado a funçao delete passando o ID
+  del_tarefa.onclick = function () {
+    // retorna o elemento pai do pai (no caso o li)
+    deleteTarefa(this.parentNode.parentNode);
+  };
+  div_controls.classList = 'controls';
+
+  text_tarefa.textContent = tarefa.task;
+
+  if (tarefa.checked) {
+    text_tarefa.classList.add('markedText');
+  }
+
+  div_controls.appendChild(check_tarefa);
+  div_controls.appendChild(del_tarefa);
+
+  li_tarefa.appendChild(text_tarefa);
+  li_tarefa.appendChild(div_controls);
+
+  return li_tarefa;
+}
+
+function deleteTarefa(elem) {
+  const index = buscaIndexTarefaArray(elem.children[0].textContent);
+  if (index === _tarefas.length) {
+    alert('Nao foi possivel excluir a tarefa!');
+  } else {
+    document.getElementById('todo-ul').removeChild(elem);
+    _tarefas.splice(index, 1);
     setLocalSt(_tarefas);
-    exibeTarefas();
-
-    console.log(_tarefas);
+  }
+  displayTasksDiv();
 }
 
-
-function carregarTarefas(){
-    _tarefas = JSON.parse(localStorage.getItem(localStorage.key("tarefas-todo")));
-}
-
-function exibeTarefas(){
-    body_tarefas.innerHTML="";
-     const ul_list_tarefas = document.createElement("ul");
-     ul_list_tarefas.classList = "list-tasks";
-    _tarefas.forEach(function (item){
-        const li_tarefa = document.createElement("li");
-        const node = document.createTextNode(item.task);
-        li_tarefa.appendChild(node);
-        li_tarefa.innerHTML += "<button onclick='delTarefa(this)'></button>";
-        if(item.checked){
-            li_tarefa.innerHTML += "<input type='checkbox' onchange='checkTarefa(this)' checked/>";
-            li_tarefa.style.textDecoration = "line-through";
-        }
-        else
-            li_tarefa.innerHTML += "<input type='checkbox' onchange='checkTarefa(this)'/>";
-        ul_list_tarefas.appendChild(li_tarefa);
-    })
-    body_tarefas.appendChild(ul_list_tarefas);
-}
-
-function checkTarefa(elem){
-    if(elem.parentElement.childNodes[2].checked){
-        checkAlterar(elem, true);
-        elem.parentElement.style.textDecoration = "line-through";
-    }
-    else{
-        checkAlterar(elem, false);
-        elem.parentElement.style.textDecoration = "none";
-    }
-}
-
-
-function delTarefa(elem){
-    let thisText = elem.parentElement.childNodes[0].data;
-    //Buscar Indice do Objeto dentro do Array
-    let index;
-    for (index = 0; index < _tarefas.length; index++) {
-        if(_tarefas[index].task === thisText){
-            break;
-        } 
-    }
-    //remove o objeto do Array ,1 quantidade de item a remover
-    if(index === _tarefas.length){
-        console.log("não foi possivel excluir!");
-    }else{
-        _tarefas.splice(index, 1);
-        setLocalSt(_tarefas);
-        elem.parentElement.remove();
-    }
-
-    // console.log(_tarefas);
+function checkTarefa(elem, status) {
+  const index = buscaIndexTarefaArray(elem.children[0].textContent);
+  if (index === _tarefas.length) {
+    alert('Nao foi possivel alterar a tarefa!');
+  } else {
+    status
+      ? elem.children[0].classList.add('markedText')
+      : elem.children[0].classList.remove('markedText');
+    _tarefas[index].checked = status;
+    setLocalSt(_tarefas);
+  }
 }
 
 // ------------------------------- Funçoes de Apoio -----------------
 
-function setLocalSt(arrTarefas){
-    localStorage.setItem("tarefas-todo", JSON.stringify(arrTarefas));
+function buscaIndexTarefaArray(tarefa_text) {
+  for (let index = 0; index < _tarefas.length; index++) {
+    if (_tarefas[index].task === tarefa_text) {
+      return index;
+    }
+  }
 }
 
-function errorInsere(){
-    alerta_error.style.display = "block";
-    inpt_tarefa.style = "border: 2px solid red;";
-    limpaCampo();
-    let timeout = setTimeout(function() {
-        alerta_error.style.display = "none";
-        inpt_tarefa.style = "border: 2px solid rgb(170, 169, 169);";
-      }, 5000)
+function setLocalSt(arrTarefas) {
+  localStorage.setItem('tarefas-todo', JSON.stringify(arrTarefas));
 }
 
-function limpaCampo(){
-    inpt_tarefa.value = "";
-    inpt_tarefa.focus();
+function carregarTarefas() {
+  _tarefas = JSON.parse(localStorage.getItem(localStorage.key('tarefas-todo')));
 }
 
-function checkAlterar(elem, status){
-    let thisText = elem.parentElement.childNodes[0].data;
-        // Buscar Indice do Objeto dentro do Array
-        let index;
-        for (index = 0; index < _tarefas.length; index++) {
-            if(_tarefas[index].task === thisText){
-            break;
-            } 
-        }
-        if(index === _tarefas.length){
-            console.log("não foi possivel alterar!");
-        }else{
-            _tarefas[index].checked=status;
-            setLocalSt(_tarefas);
-        }
+function inputCaracter(elem) {
+  let caracterDigitado = elem.value.length;
+  let caracterRestante = caracterLimite - caracterDigitado;
+
+  spn_caracteres.textContent = caracterRestante;
+}
+
+function limpaCampoTarefa() {
+  inpt_tarefa.value = '';
+}
+
+function checkElementExists() {
+  // se o a div .tasks não existir, é criada
+  if (!document.querySelector('.tasks')) {
+    //criar elemento dentro do wrapper e atribuir a classe .tasks
+    const sec_tasks = document.getElementById('todo-tasks');
+    const div_tasks = document.createElement('div');
+    div_tasks.classList.add('tasks');
+    sec_tasks.children[0].appendChild(div_tasks);
+  }
+}
+
+// function verifica se a lista de tarefas tem itens, caso nao tenha remove a div_tasks da pagina para nao aparecer vazia
+function displayTasksDiv() {
+  if (_tarefas.length == 0) {
+    const sec_tasks = document.getElementById('todo-tasks');
+    const div_tasks = document.querySelector('.tasks');
+    sec_tasks.children[0].removeChild(div_tasks);
+
+    //caso não haja tarefas, é removido do localstorage o array de tarefas
+    localStorage.removeItem('tarefas-todo');
+  }
+}
+
+function errorInsere() {
+  inpt_tarefa.classList.add('inpErrorFocus');
+  const timeout = setTimeout(function () {
+    inpt_tarefa.classList.remove('inpErrorFocus');
+  }, 500);
 }
