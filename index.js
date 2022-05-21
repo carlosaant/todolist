@@ -43,8 +43,8 @@ onload = function () {
 function adcionarTarefa() {
   //trim() retira os espaços para comparaçao
   if (inpt_tarefa.value.trim() === '') {
-    // errorInsere();
-    alert('Insira uma Tarefa válida!');
+    errorInsere();
+    // alert('Insira uma Tarefa válida!');
     limpaCampoTarefa();
   } else {
     criarTarefa(inpt_tarefa.value.trim());
@@ -197,4 +197,12 @@ function displayTasksDiv() {
     //caso não haja tarefas, é removido do localstorage o array de tarefas
     localStorage.removeItem('tarefas-todo');
   }
+}
+
+function errorInsere() {
+  inpt_tarefa.classList.add('inpErrorFocus');
+  inpt_tarefa.focus();
+  const timeout = setTimeout(function () {
+    inpt_tarefa.classList.remove('inpErrorFocus');
+  }, 500);
 }
