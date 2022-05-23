@@ -1,14 +1,19 @@
-﻿# To-Do-List
+﻿# To-Do List
 
 Pagina lista de Tarefas
 
-Utiliza as tecnologias:
-* HTML
-* CSS
-* Js
+## 💻 Tecnologias:
 
-* Persistencia de dados em LocalStorage
+- HTML
+- CSS
+- Js
+- Armazenamento em LocalStorage
 
+## 📝 Interações
 
-Projeto de estudo, realizado como desafio do Módulo
-de Javascript do Curso progBR
+- Suavização de elementos
+- Contagem de caracteres conforme texto digitado (ou colado Ctrl+v)
+- Elementos do corpo de tarefas todos gerados via Js (div, ul, li), conforme existencia de tarefas
+- Funções de busca dentro dos Arrays e Objeto, por texto, e busca de indice
+
+Projeto de estudo, realizado como desafio para aplicação de conhecimentos focado em JavaScript.
