@@ -290,3 +290,10 @@ header h2 {
 
   border: 1px solid red;
 }
+
+@media (min-width: 1024px) {
+  .todo-div {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
