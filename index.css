@@ -81,12 +81,15 @@ header h2 {
 
 .todo-div {
   width: 100%;
-  padding-block: 7rem;
+  padding-block: 6rem;
 
   display: flex;
+
+  flex-direction: column;
   flex-wrap: wrap;
+
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.5rem;
 
   border-radius: 5px;
@@ -134,9 +137,11 @@ header h2 {
   background-color: var(--primary-color);
   border: 1px solid transparent;
   color: white;
-  padding: 1rem 2rem;
-  text-decoration: none;
 
+  padding: 1rem 2rem;
+  margin-block: 0.2rem;
+
+  text-decoration: none;
   font-size: 1.6rem;
   text-transform: uppercase;
   font-weight: bold;
