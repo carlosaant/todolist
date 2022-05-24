@@ -239,9 +239,9 @@ function makeTextTarefa(elem) {
     // spReadMore.appendChild(spTextExtra);
 
     spReadMore.onclick = function () {
-      console.log(this.parentNode.children[0]);
-      this.textContent = '';
+      this.style.display = 'none';
       this.parentNode.children[0].classList.remove('sp-textli');
+      this.parentNode.children[0].style.display = 'inline-block';
     };
 
     elem.appendChild(spTextExtra);
