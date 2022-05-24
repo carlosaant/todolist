@@ -73,7 +73,7 @@ function renderTasksOnScreen() {
   }
   // insere filho recebendo ul criada com os itens
   div_tasks.appendChild(createListOfItensTaks());
-
+  readmore();
   // pode verificar se a ul ja existe, senao cria ela, ai no caso só adicionaria os elementos li
 }
 
@@ -205,4 +205,18 @@ function errorInsere() {
   const timeout = setTimeout(function () {
     inpt_tarefa.classList.remove('inpErrorFocus');
   }, 500);
+}
+
+function readmore() {
+  const elem = document.querySelectorAll('#todo-ul p');
+  const LIMIT = 15;
+  for (let p of elem) {
+    let dotsOrEmpty;
+    if (p.innerText.length > LIMIT) {
+      dotsOrEmpty = '...';
+    } else {
+      dotsOrEmpty = '';
+    }
+    p.innerText = p.innerText.substring(0, LIMIT) + dotsOrEmpty;
+  }
 }

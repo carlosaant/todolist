@@ -189,9 +189,9 @@ header h2 {
   line-height: 150%;
 
   /* para nao quebrar o li */
-  overflow: hidden;
+  /* overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; */
 }
 
 #todo-tasks ul li .controls {
