@@ -73,7 +73,7 @@ function renderTasksOnScreen() {
   }
   // insere filho recebendo ul criada com os itens
   div_tasks.appendChild(createListOfItensTaks());
-  readmore();
+  // readmore();
   // pode verificar se a ul ja existe, senao cria ela, ai no caso só adicionaria os elementos li
 }
 
@@ -117,7 +117,7 @@ function createLiItemTask(tarefa) {
   div_controls.appendChild(check_tarefa);
   div_controls.appendChild(del_tarefa);
 
-  li_tarefa.appendChild(text_tarefa);
+  li_tarefa.appendChild(makeTextTarefa(text_tarefa));
   li_tarefa.appendChild(div_controls);
 
   return li_tarefa;
@@ -222,4 +222,30 @@ function readmore() {
 
     p.innerText = p.innerText.substring(0, LIMIT) + dotsOrEmpty;
   }
+}
+
+function makeTextTarefa(elem) {
+  const spReadMore = document.createElement('span');
+  const spTextExtra = document.createElement('span');
+  const LIMIT = 20;
+  spReadMore.textContent = '...ver mais';
+  if (elem.textContent.length > LIMIT) {
+    spTextExtra.textContent = elem.textContent.substring(
+      LIMIT,
+      elem.textContent.length
+    );
+    elem.textContent = elem.textContent.substring(0, LIMIT);
+    spTextExtra.classList.add('sp-textli');
+    // spReadMore.appendChild(spTextExtra);
+
+    spReadMore.onclick = function () {
+      console.log(this.parentNode.children[0]);
+      this.textContent = '';
+      this.parentNode.children[0].classList.remove('sp-textli');
+    };
+
+    elem.appendChild(spTextExtra);
+    elem.appendChild(spReadMore);
+  }
+  return elem;
 }
