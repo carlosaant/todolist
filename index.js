@@ -214,9 +214,12 @@ function readmore() {
     let dotsOrEmpty;
     if (p.innerText.length > LIMIT) {
       dotsOrEmpty = '...';
+      //
+      console.log(p.innerText.substring(LIMIT, p.innerText.length));
     } else {
       dotsOrEmpty = '';
     }
+
     p.innerText = p.innerText.substring(0, LIMIT) + dotsOrEmpty;
   }
 }
