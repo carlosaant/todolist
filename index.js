@@ -124,7 +124,17 @@ function createLiItemTask(tarefa) {
 }
 
 function deleteTarefa(elem) {
-  const index = buscaIndexTarefaArray(elem.children[0].textContent);
+  let index;
+  // verifica se o span existe dentro do P
+  if (elem.children[0].children[0] != null) {
+    // remove o "..ver mais e torna visivel o restante do texto novamente, para em seguida buscar o indice no array com o texto completo"
+    elem.children[0].children[1].style.display = 'none';
+    elem.children[0].children[0].classList.remove('sp-textli');
+    elem.children[0].children[0].style.display = 'inline-block';
+    index = buscaIndexTarefaArray(elem.children[0].innerText);
+  } else {
+    index = buscaIndexTarefaArray(elem.children[0].innerText);
+  }
   if (index === _tarefas.length) {
     alert('Nao foi possivel excluir a tarefa!');
   } else {
@@ -139,7 +149,10 @@ function checkTarefa(elem, status) {
   let index;
   // verifica se o span existe dentro do P
   if (elem.children[0].children[0] != null) {
-    console.log(elem.children[0].innerText);
+    // remove o "..ver mais e torna visivel o restante do texto novamente, para em seguida buscar o indice no array com o texto completo"
+    elem.children[0].children[1].style.display = 'none';
+    elem.children[0].children[0].classList.remove('sp-textli');
+    elem.children[0].children[0].style.display = 'inline-block';
     index = buscaIndexTarefaArray(elem.children[0].innerText);
   } else {
     index = buscaIndexTarefaArray(elem.children[0].innerText);
