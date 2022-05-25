@@ -136,7 +136,14 @@ function deleteTarefa(elem) {
 }
 
 function checkTarefa(elem, status) {
-  const index = buscaIndexTarefaArray(elem.children[0].textContent);
+  let index;
+  // verifica se o span existe dentro do P
+  if (elem.children[0].children[0] != null) {
+    console.log(elem.children[0].innerText);
+    index = buscaIndexTarefaArray(elem.children[0].innerText);
+  } else {
+    index = buscaIndexTarefaArray(elem.children[0].innerText);
+  }
   if (index === _tarefas.length) {
     alert('Nao foi possivel alterar a tarefa!');
   } else {
@@ -207,22 +214,22 @@ function errorInsere() {
   }, 500);
 }
 
-function readmore() {
-  const elem = document.querySelectorAll('#todo-ul p');
-  const LIMIT = 15;
-  for (let p of elem) {
-    let dotsOrEmpty;
-    if (p.innerText.length > LIMIT) {
-      dotsOrEmpty = '...';
-      //
-      console.log(p.innerText.substring(LIMIT, p.innerText.length));
-    } else {
-      dotsOrEmpty = '';
-    }
+// function readmore() {
+//   const elem = document.querySelectorAll('#todo-ul p');
+//   const LIMIT = 15;
+//   for (let p of elem) {
+//     let dotsOrEmpty;
+//     if (p.innerText.length > LIMIT) {
+//       dotsOrEmpty = '...';
+//       //
+//       console.log(p.innerText.substring(LIMIT, p.innerText.length));
+//     } else {
+//       dotsOrEmpty = '';
+//     }
 
-    p.innerText = p.innerText.substring(0, LIMIT) + dotsOrEmpty;
-  }
-}
+//     p.innerText = p.innerText.substring(0, LIMIT) + dotsOrEmpty;
+//   }
+// }
 
 function makeTextTarefa(elem) {
   const spReadMore = document.createElement('span');
