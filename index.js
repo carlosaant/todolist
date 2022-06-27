@@ -29,7 +29,7 @@ onload = function () {
         caso haja itens no localstorage, chama a funçao para carregar o Array com as tarefas armazenadas
         e em seguida exibe na tela em sequencia.
 //  */
-  if (localStorage.length > 0) {
+  if (localStorage.getItem('tarefas-todo') != null) {
     carregarTarefas();
     renderTasksOnScreen();
   }
