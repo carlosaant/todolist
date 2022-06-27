@@ -183,7 +183,7 @@ function setLocalSt(arrTarefas) {
 }
 
 function carregarTarefas() {
-  _tarefas = JSON.parse(localStorage.getItem(localStorage.key('tarefas-todo')));
+  _tarefas = JSON.parse(localStorage.getItem('tarefas-todo'));
 }
 
 function inputCaracter(elem) {
